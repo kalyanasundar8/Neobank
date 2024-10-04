@@ -2,9 +2,6 @@ import mongoose from "mongoose";
 
 const user = new mongoose.Schema(
   {
-    accountNumber: {
-      type: Number,
-    },
     userName: {
       type: String,
       required: true,
@@ -14,7 +11,7 @@ const user = new mongoose.Schema(
       required: true,
     },
     otp: {
-      type: Number,
+      type: String,
       required: false,
     },
     email: {
@@ -22,10 +19,6 @@ const user = new mongoose.Schema(
       required: true,
     },
     address: {
-      type: String,
-      required: true,
-    },
-    accountType: {
       type: String,
       required: true,
     },
@@ -37,16 +30,6 @@ const user = new mongoose.Schema(
       type: Boolean,
       required: true,
       default: false,
-    },
-    approved: {
-      type: Boolean,
-      default: false,
-      required: true,
-    },
-    accountStatus: {
-      type: String,
-      default: false,
-      required: true,
     },
   },
   { timestamps: true }
