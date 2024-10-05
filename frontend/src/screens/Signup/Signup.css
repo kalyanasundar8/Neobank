@@ -1,0 +1,66 @@
+.bg-gradient {
+  height: 100vh;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #fff, #AD49E1);
+}
+
+.form-container {
+  width: 100%;
+  max-width: 390px;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+}
+
+.form-container .form-header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-container .form-header .title {
+    font-size: 18px;
+}
+
+.form-container .form-header .logo {
+    font-size: 25px;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-container form .input-box {
+  width: calc(100% / 1 - 0px);
+}
+
+.form-container form .input-box input {
+    height: 40px;
+    width: 100%;
+    padding: 0 5px;
+    outline: none;
+    border: 1px solid #999;
+    border-radius: 3px;
+}
+
+.form-container form .input-box select {
+    height: 45px;
+    width: 100%;
+    padding: 0 5px;
+    border: 1px solid #999;
+    background: none;
+    outline: none;
+}
+
+.form-container form .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0px;
+}
