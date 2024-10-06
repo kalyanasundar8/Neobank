@@ -1,8 +1,9 @@
 import express from "express";
-import { createAccount } from "../controllers/UserController.js";
+import { createProfile, verifyOtp } from "../controllers/UserController.js";
 
 const userRouter = express.Router();
 
-userRouter.post("/createAccount", createAccount);
+userRouter.post("/createProfile", createProfile);
+userRouter.post("/verifyOtp", verifyOtp);
 
 export default userRouter;
