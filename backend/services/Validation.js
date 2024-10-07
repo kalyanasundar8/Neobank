@@ -1,5 +1,3 @@
-import bcrypt from "bcryptjs";
-
 const mobileAndEmailCheck = (mobileNumber, email) => {
   const numberRegex = /^[6-9]\d{9}$/;
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -15,16 +13,4 @@ const mobileAndEmailCheck = (mobileNumber, email) => {
   }
 };
 
-const hashPassword = async (password) => {
-  // Generate salt
-  const salt = 10;
-
-  try {
-    const hashedPassword = await bcrypt.hash(password, salt);
-    return hashedPassword;
-  } catch (error) {
-    console.error("Error hashing password: ", error);
-  }
-};
-
-export { mobileAndEmailCheck, hashPassword };
+export { mobileAndEmailCheck };

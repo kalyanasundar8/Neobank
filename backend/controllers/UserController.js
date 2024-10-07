@@ -1,7 +1,8 @@
 import asyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 import User from "../models/UserModel.js";
-import { hashPassword, mobileAndEmailCheck } from "../services/Validation.js";
+import { mobileAndEmailCheck } from "../services/Validation.js";
 import { generateOtp } from "../services/GenerateOtp.js";
 import { decodeToken, generateToken } from "../services/TokenService.js";
 
@@ -107,7 +108,8 @@ const setPassword = asyncHandler(async (req, res) => {
     });
   }
 
-  const hashedPassword = hashPassword(password);
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
 
   verifiedUser.password = hashedPassword;
   await verifiedUser.save();
