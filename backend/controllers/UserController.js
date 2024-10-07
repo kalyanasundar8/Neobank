@@ -1,9 +1,9 @@
 import asyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
 import User from "../models/UserModel.js";
-import { mobileAndEmailCheck } from "../services/Validation.js";
+import { hashPassword, mobileAndEmailCheck } from "../services/Validation.js";
 import { generateOtp } from "../services/GenerateOtp.js";
-import { generateToken } from "../services/GenerateToken.js";
+import { decodeToken, generateToken } from "../services/TokenService.js";
 
 // Desc    Create an user profile
 // Route   /api/user/createProfile
@@ -57,14 +57,9 @@ const createProfile = asyncHandler(async (req, res) => {
 // Route   /api/user/verifyOtp
 const verifyOtp = asyncHandler(async (req, res) => {
   const { otp, token } = req.body;
-  // Decode a token
-  let decodedToken;
 
-  try {
-    decodedToken = jwt.verify(token, process.env.SECRET_KEY);
-  } catch (error) {
-    return res.status(401).json({ message: "Invalid (or) Expired Token" });
-  }
+  // Token decode
+  const decodedToken = decodeToken(token);
 
   // Check the user verification status
   const verifiedUser = await User.findOne({
@@ -92,4 +87,38 @@ const verifyOtp = asyncHandler(async (req, res) => {
   }
 });
 
-export { createProfile, verifyOtp };
+// Desc    Set password
+// Route   /api/user/setPassword
+const setPassword = asyncHandler(async (req, res) => {
+  const { token, password, confirmPassword } = req.body;
+
+  // Token decode
+  const decodedToken = decodeToken(token);
+
+  // Check the user verification status
+  const verifiedUser = await User.findOne({
+    _id: decodedToken.id,
+    verified: true,
+  });
+
+  if (!verifiedUser) {
+    return res.status(400).json({
+      message: "Please verify your profile and set your password",
+    });
+  }
+
+  const hashedPassword = hashPassword(password);
+
+  verifiedUser.password = hashedPassword;
+  await verifiedUser.save();
+
+  return res.status(200).json({
+    id: verifiedUser._id,
+    name: verifiedUser.userName,
+    mobileNumber: verifiedUser.mobileNumber,
+    email: verifiedUser.email,
+    status: verifiedUser.verified,
+  });
+});
+
+export { createProfile, verifyOtp, setPassword };
