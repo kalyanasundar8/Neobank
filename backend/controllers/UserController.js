@@ -63,22 +63,33 @@ const verifyOtp = asyncHandler(async (req, res) => {
   const decodedToken = decodeToken(token);
 
   // Check the user verification status
-  const verifiedUser = await User.findOne({
+  const user = await User.findOne({
     _id: decodedToken.id,
-    verified: false,
   });
 
-  if (!verifiedUser) {
-    return res.status(400).json({
-      message: "User already verified or does not exist, Please Signin.",
-    });
+  if (user.verified) {
+    const validOtp = user.otp === otp;
+    if (validOtp) {
+      return res.status(200).json({
+        id: user._id,
+        userName: user.userName,
+        mobileNumber: user.mobileNumber,
+        email: user.email,
+        address: user.address,
+        verified: user.verified,
+      });
+    } else {
+      return res
+        .status(400)
+        .json({ message: "OTP is not valid, Please check your OTP" });
+    }
   }
 
   // Check the otp is valid
-  const validOtp = verifiedUser.otp === otp;
+  const validOtp = user.otp === otp;
   if (validOtp) {
-    verifiedUser.verified = true;
-    await verifiedUser.save();
+    user.verified = true;
+    await user.save();
 
     return res.status(200).json({ token });
   } else {
@@ -123,4 +134,26 @@ const setPassword = asyncHandler(async (req, res) => {
   });
 });
 
-export { createProfile, verifyOtp, setPassword };
+// Desc    SignIn
+// Route   /api/user/signin
+const signin = asyncHandler(async (req, res) => {
+  const { mobileNumber } = req.body;
+
+  const userExists = await User.findOne({
+    mobileNumber: mobileNumber,
+    verified: true,
+  });
+
+  if (!userExists) {
+    return res.status(400).json({ message: "User not exists or Not verified" });
+  }
+
+  userExists.otp = generateOtp();
+  await userExists.save();
+
+  return res.status(200).json({
+    token: generateToken(userExists._id),
+  });
+});
+
+export { createProfile, verifyOtp, setPassword, signin };
