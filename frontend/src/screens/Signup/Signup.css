@@ -4,7 +4,7 @@
   padding: 10px;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, #fff, #AD49E1);
+  background: linear-gradient(180deg, #fff, #ad49e1);
 }
 
 .form-container {
@@ -16,18 +16,18 @@
 }
 
 .form-container .form-header {
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    margin-bottom: 20px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .form-container .form-header .title {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .form-container .form-header .logo {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 .form-container form {
@@ -40,27 +40,45 @@
   width: calc(100% / 1 - 0px);
 }
 
-.form-container form .input-box input {
-    height: 40px;
-    width: 100%;
-    padding: 0 5px;
-    outline: none;
-    border: 1px solid #999;
-    border-radius: 3px;
+.form-container form .input-box .input {
+  height: 40px;
+  width: 100%;
+  padding: 0 5px;
+  outline: none;
+  border: 1px solid #999;
+  border-radius: 3px;
 }
 
 .form-container form .input-box select {
-    height: 45px;
-    width: 100%;
-    padding: 0 5px;
-    border: 1px solid #999;
-    background: none;
-    outline: none;
+  height: 45px;
+  width: 100%;
+  padding: 0 5px;
+  border: 1px solid #999;
+  background: none;
+  outline: none;
+  border-radius: 3px;
 }
 
 .form-container form .navigation {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0px;
+}
+
+/* Validation error messages */
+.error-border {
+  height: 40px;
+  width: 100%;
+  padding: 0 5px;
+  outline: none;
+  border: 1px solid red;
+  border-radius: 3px;
+}
+
+.validation-error-message {
+  font-size: 12px;
+  font-weight: 400;
+  margin: 3px 0;
+  color: red;
 }

@@ -14,13 +14,13 @@ const SetPassword = () => {
         <div className="form-fields">
           <form action="#">
             <div className="input-box">
-              <input type="password" placeholder="password" />
+              <input type="password" placeholder="password" className="input"/>
             </div>
             <div className="input-box">
-              <input type="password" placeholder="Confirm Password" />
+              <input type="password" placeholder="Confirm Password" className="input"/>
             </div>
             <div className="input-box">
-              <input type="submit" value="Set password" className="primary-btn" />
+              <input type="submit" value="Set password" className="primary-btn input" />
             </div>
           </form>
         </div>

@@ -14,13 +14,13 @@ const Signin = () => {
         <div className="form-fields">
           <form action="#">
             <div className="input-box">
-              <input type="tel" placeholder="Mobile Number / Email" />
+              <input type="tel" placeholder="Mobile Number / Email" className="input"/>
             </div>
             <div className="input-box">
-              <input type="text" placeholder="Password" />
+              <input type="text" placeholder="Password" className="input"/>
             </div>
             <div className="input-box">
-              <input type="submit" value="Sign In" className="primary-btn" />
+              <input type="submit" value="Sign In" className="primary-btn input" />
             </div>
             <div className="navigation">
               <p>I dont't have an account?</p>

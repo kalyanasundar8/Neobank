@@ -14,10 +14,10 @@ const Otp = () => {
         <div className="form-fields">
           <form action="#">
             <div className="input-box">
-              <input type="text" placeholder="Your OTP" />
+              <input type="text" placeholder="Your OTP" className="input"/>
             </div>
             <div className="input-box">
-              <input type="submit" value="Verify" className="primary-btn" />
+              <input type="submit" value="Verify" className="primary-btn input" />
             </div>
             <div className="navigation">
               <p>Resend OTP</p>
